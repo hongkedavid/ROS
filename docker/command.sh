@@ -1,3 +1,6 @@
+# List running containers 
+sudo docker container list
+
 # Attach to a running container 
 sudo docker attach apollo_dev
  
