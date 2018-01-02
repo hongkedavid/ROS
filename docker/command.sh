@@ -8,4 +8,4 @@ sudo docker attach apollo_dev
 exit
 
 # Run a container
-sudo docker exec -t -i 04f16cf35fae /bin/bash
+sudo docker exec -t -i apollo_dev /bin/bash
