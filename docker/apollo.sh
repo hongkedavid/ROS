@@ -18,7 +18,7 @@ bash ./docs/demo_guide/rosbag_helper.sh download
 # Ref: https://github.com/ApolloAuto/apollo/issues/181
 source /apollo/bazel-apollo/external/ros/setup.bash
 
-# Relay demo rosbag 
+# Relay demo rosbag and go to http://localhost:8888
 rosbag play -l ./docs/demo_guide/demo_2.0.bag
 
 # Detach from the container
