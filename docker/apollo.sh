@@ -15,6 +15,7 @@ bash scripts/bootstrap.sh
 bash ./docs/demo_guide/rosbag_helper.sh download 
 
 # Set up ROS environment
+# Ref: https://github.com/ApolloAuto/apollo/issues/181
 source /apollo/bazel-apollo/external/ros/setup.bash
 
 # Relay demo rosbag 
