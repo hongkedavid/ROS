@@ -6,3 +6,6 @@ python dumpbag.py demo.bag demobag_out/ --raw_bag=True
 
 # Encode protocol buffer message
 /usr/local/bin/protoc --encode=apollo.drivers.gnss.Gnss gnss.proto < gnss_msb.pb.txt > gnss_msg.bin
+
+# Dump ros bag files with binary output
+python writebag.py demo.bag demo.np.bag --raw_bag=True
