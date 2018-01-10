@@ -44,6 +44,7 @@ fi
 
 echo "/apollo/data/core/core_%e.%p" | sudo tee /proc/sys/kernel/core_pattern
 
+# Set up env variables 
 source ${APOLLO_ROOT_DIR}/scripts/apollo_base.sh
 
 function main(){
@@ -55,11 +56,12 @@ function main(){
         docker pull $IMG
     fi
 
+    # If an Apollo docker is running, stop and remove it
     docker ps -a --format "{{.Names}}" | grep 'apollo_dev' 1>/dev/null
-    if [ $? == 0 ]; then
-        docker stop apollo_dev 1>/dev/null
-        docker rm -f apollo_dev 1>/dev/null
-    fi
+#    if [ $? == 0 ]; then
+#        docker stop apollo_dev 1>/dev/null
+#        docker rm -f apollo_dev 1>/dev/null
+#    fi
     local display=""
     if [[ -z ${DISPLAY} ]];then
         display=":0"
