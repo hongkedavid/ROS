@@ -98,7 +98,7 @@ function main(){
     docker run -it \
         -d \
         --privileged \
-        --name apollo_dev \
+        --name apollo_david_dev \  #--name apollo_dev \
         -e DISPLAY=$display \
         -e DOCKER_USER=$USER \
         -e USER=$USER \
