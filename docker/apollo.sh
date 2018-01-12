@@ -21,5 +21,8 @@ source /apollo/bazel-apollo/external/ros/setup.bash
 # Relay demo rosbag and go to http://localhost:8888
 rosbag play -l ./docs/demo_guide/demo_2.0.bag
 
+# Stop module monitor
+bash scripts/bootstrap.sh stop
+
 # Detach from the container
 exit (or Ctrl-D)
