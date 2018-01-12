@@ -26,3 +26,9 @@ bash scripts/bootstrap.sh stop
 
 # Detach from the container
 exit (or Ctrl-D)
+
+# Stop and remove the docker container if needed
+sudo docker stop apollo_david_dev
+sudo docker container list
+sudo docker ps -aq -f status=exited
+sudo docker rm apollo_david_dev
