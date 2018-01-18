@@ -32,3 +32,6 @@ sudo docker stop apollo_david_dev
 sudo docker container list
 sudo docker ps -aq -f status=exited
 sudo docker rm apollo_david_dev
+
+# Optional: enable incoming traffic to port 8888
+sudo iptables -A INPUT -p tcp --dport 8888 -j ACCEPT
