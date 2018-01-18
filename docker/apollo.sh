@@ -8,7 +8,8 @@ bash docker/scripts/dev_start.sh
 bash docker/scripts/dev_into.sh
 
 # Within docker container
-# Start module monitor
+# Start ROS and monitor/dreamview
+# Tune master timeout value if needed (ref: https://github.com/ApolloAuto/apollo/issues/2500)
 bash scripts/bootstrap.sh
 
 # Download demo rosbag
