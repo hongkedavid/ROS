@@ -6,3 +6,6 @@ supervisorctl stop planning
 supervisorctl stop control
 supervisorctl stop dreamview
 supervisorctl stop monitor
+
+# Optional: stop recording
+supervisorctl stop record
