@@ -8,4 +8,4 @@ supervisorctl stop dreamview
 supervisorctl stop monitor
 
 # Optional: stop recording
-supervisorctl stop record
+scripts/record_bag.sh stop
