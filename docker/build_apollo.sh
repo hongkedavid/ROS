@@ -12,5 +12,6 @@ bazel build modules/calibration/lidar_ex_checker:all
 bazel build modules/calibration/republish_msg:all
 
 # Build fail in dreamview and perception
+# Related issue: https://github.com/ApolloAuto/apollo/issues/2629
 bazel build modules/perception:all
 bazel build modules/dreamview:all
