@@ -1,5 +1,6 @@
-# clang and llvm setup
+# clang and llvm setup in docker instance
 # Ref: https://github.com/whoenig/ros-clang-instrumentation
+sudo apt-get update
 sudo apt install -y llvm-3.8-dev libclang-3.8-dev clang
 
 # clang preprocessor
