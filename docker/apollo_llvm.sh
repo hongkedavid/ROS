@@ -1,3 +1,7 @@
+# clang and llvm setup
+# Ref: https://github.com/whoenig/ros-clang-instrumentation
+sudo apt install -y llvm-3.8-dev libclang-3.8-dev clang
+
 # clang preprocessor
 clang -C -E $file.cc > $file.ii 
 
