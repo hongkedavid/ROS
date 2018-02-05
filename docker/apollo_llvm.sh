@@ -3,6 +3,9 @@
 sudo apt-get update
 sudo apt install -y llvm-3.8-dev libclang-3.8-dev clang
 
+# CROSSTOOL
+bazel build --crosstool_top=@bazel_tools//tools/cpp:toolchain --cpu=k8 modules/monitor:all 
+
 # clang preprocessor
 clang -C -E $file.cc > $file.ii 
 
