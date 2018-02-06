@@ -3,9 +3,29 @@
 sudo apt-get update
 sudo apt install -y llvm-3.8-dev libclang-3.8-dev clang
 
-# CROSSTOOL
+# CROSSTOOL config does not work, seems hard to reconfigure bazel_tools
+# Ref: https://github.com/bazelbuild/bazel/issues/3566
+# Ref: https://stackoverflow.com/questions/45710957/how-to-generate-llvm-ir-binary-bc-while-compiling-project-with-bazel 
+# Ref: https://github.com/bazelbuild/bazel/wiki/Building-with-a-custom-toolchain
+# Ref: https://groups.google.com/forum/#!topic/bazel-discuss/VBhB9aVkho4
+# Ref: https://groups.google.com/forum/#!topic/bazel-discuss/uvPVi9fmQME
+# Ref: https://groups.google.com/forum/#!topic/bazel-discuss/U4yMaZGPqe4
+# Ref: https://docs.bazel.build/versions/master/command-line-reference.html
+# Ref: https://docs.bazel.build/versions/master/best-practices.html
 # cpu: k8, armeabi-v7a, x64_windows_msvc, x64_windows_msys, s390x, ios_x86_64
 bazel build --crosstool_top=@bazel_tools//tools/cpp:toolchain --cpu=k8 modules/monitor:all 
+
+# Per-module LLVM bitcode for Apollo
+clang -c -emit-llvm -std=c++11 -I /apollo/ -I /home/tmp/ -I /apollo/bazel-genfiles -I /home/david/.cache/bazel/_bazel_david/540135163923dd7d5820f3ee4b306b32/external/com_google_protobuf/src/ /apollo/modules/monitor/monitor.cc -o /apollo/modules/monitor/monitor.bc
+clang -c -emit-llvm -std=c++11 -I /apollo/ -I /home/tmp/ -I /apollo/bazel-genfiles -I /home/david/.cache/bazel/_bazel_david/540135163923dd7d5820f3ee4b306b32/external/com_google_protobuf/src/ -I /home/david/.cache/bazel/_bazel_david/540135163923dd7d5820f3ee4b306b32/external/civetweb/include/ /apollo/modules/dreamview/backend/hmi/hmi.cc -o /apollo/modules/dreamview/backend/hmi/hmi.bc
+clang -c -emit-llvm -std=c++11 -I /apollo/ -I /home/tmp/ -I /apollo/bazel-genfiles -I /home/david/.cache/bazel/_bazel_david/540135163923dd7d5820f3ee4b306b32/external/com_google_protobuf/src/ /apollo/modules/control/control.cc -o /apollo/modules/control/control.bc
+clang -c -emit-llvm -std=c++11 -I /apollo/ -I /home/tmp/ -I /apollo/bazel-genfiles -I /home/david/.cache/bazel/_bazel_david/540135163923dd7d5820f3ee4b306b32/external/com_google_protobuf/src/ /apollo/modules/canbus/canbus.cc -o /apollo/modules/canbus/canbus.bc
+clang -c -emit-llvm -std=c++11 -I /apollo/ -I /home/tmp/ -I /apollo/bazel-genfiles -I /home/david/.cache/bazel/_bazel_david/540135163923dd7d5820f3ee4b306b32/external/com_google_protobuf/src/ /apollo/modules/planning/planning.cc -o /apollo/modules/planning/planning.bc
+clang -c -emit-llvm -std=c++11 -I /apollo/ -I /home/tmp/ -I /apollo/bazel-genfiles -I /home/david/.cache/bazel/_bazel_david/540135163923dd7d5820f3ee4b306b32/external/com_google_protobuf/src/ -I /home/david/.cache/bazel/_bazel_david/540135163923dd7d5820f3ee4b306b32/external/eigen/ /apollo/modules/routing/routing.cc -o /apollo/modules/routing/routing.bc
+clang -c -emit-llvm -std=c++11 -I /apollo/ -I /home/tmp/ -I /apollo/bazel-genfiles -I /home/david/.cache/bazel/_bazel_david/540135163923dd7d5820f3ee4b306b32/external/com_google_protobuf/src/ -I /home/david/.cache/bazel/_bazel_david/540135163923dd7d5820f3ee4b306b32/external/eigen/ /apollo/modules/prediction/prediction.cc -o /apollo/modules/prediction/prediction.bc
+#clang -c -emit-llvm -std=c++11 -I /apollo/ -I /home/tmp/ -I /apollo/bazel-genfiles -I /home/david/.cache/bazel/_bazel_david/540135163923dd7d5820f3ee4b306b32/external/com_google_protobuf/src/ /apollo/modules/localization/localization.cc -o /apollo/modules/localization/localization.bc
+clang -c -emit-llvm -std=c++11 -I /apollo/ -I /home/tmp/ -I /apollo/bazel-genfiles -I /home/david/.cache/bazel/_bazel_david/540135163923dd7d5820f3ee4b306b32/external/com_google_protobuf/src/ -I /home/david/.cache/bazel/_bazel_david/540135163923dd7d5820f3ee4b306b32/external/eigen/ -I /usr/local/include/pcl-1.7/ /apollo/modules/perception/perception.cc -o /apollo/modules/perception/perception.bc
+clang -c -emit-llvm -std=c++11 -I /apollo/ -I /home/tmp/ -I /apollo/bazel-genfiles -I /home/david/.cache/bazel/_bazel_david/540135163923dd7d5820f3ee4b306b32/external/com_google_protobuf/src/ /apollo/modules/third_party_perception/third_party_perception.cc -o /apollo/modules/third_party_perception/third_party_perception.bc
 
 # clang preprocessor
 clang -C -E $file.cc > $file.ii 
