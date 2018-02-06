@@ -16,6 +16,7 @@ sudo apt install -y llvm-3.8-dev libclang-3.8-dev clang
 bazel build --crosstool_top=@bazel_tools//tools/cpp:toolchain --cpu=k8 modules/monitor:all 
 
 # Per-module LLVM bitcode for Apollo
+# Ref: https://clang.llvm.org/docs/CommandGuide/clang.html
 clang -c -emit-llvm -std=c++11 -I /apollo/ -I /home/tmp/ -I /apollo/bazel-genfiles -I /home/david/.cache/bazel/_bazel_david/540135163923dd7d5820f3ee4b306b32/external/com_google_protobuf/src/ /apollo/modules/monitor/monitor.cc -o /apollo/modules/monitor/monitor.bc
 clang -c -emit-llvm -std=c++11 -I /apollo/ -I /home/tmp/ -I /apollo/bazel-genfiles -I /home/david/.cache/bazel/_bazel_david/540135163923dd7d5820f3ee4b306b32/external/com_google_protobuf/src/ -I /home/david/.cache/bazel/_bazel_david/540135163923dd7d5820f3ee4b306b32/external/civetweb/include/ /apollo/modules/dreamview/backend/hmi/hmi.cc -o /apollo/modules/dreamview/backend/hmi/hmi.bc
 clang -c -emit-llvm -std=c++11 -I /apollo/ -I /home/tmp/ -I /apollo/bazel-genfiles -I /home/david/.cache/bazel/_bazel_david/540135163923dd7d5820f3ee4b306b32/external/com_google_protobuf/src/ /apollo/modules/control/control.cc -o /apollo/modules/control/control.bc
@@ -27,6 +28,8 @@ clang -c -emit-llvm -std=c++11 -I /apollo/ -I /home/tmp/ -I /apollo/bazel-genfil
 clang -c -emit-llvm -std=c++11 -I /apollo/ -I /home/tmp/ -I /apollo/bazel-genfiles -I /home/david/.cache/bazel/_bazel_david/540135163923dd7d5820f3ee4b306b32/external/com_google_protobuf/src/ -I /home/david/.cache/bazel/_bazel_david/540135163923dd7d5820f3ee4b306b32/external/eigen/ -I /usr/local/include/pcl-1.7/ /apollo/modules/perception/perception.cc -o /apollo/modules/perception/perception.bc
 clang -c -emit-llvm -std=c++11 -I /apollo/ -I /home/tmp/ -I /apollo/bazel-genfiles -I /home/david/.cache/bazel/_bazel_david/540135163923dd7d5820f3ee4b306b32/external/com_google_protobuf/src/ /apollo/modules/third_party_perception/third_party_perception.cc -o /apollo/modules/third_party_perception/third_party_perception.bc
 
+# Ref: https://llvm.org/docs/GettingStarted.html
+# Ref: https://stackoverflow.com/questions/9148890/how-to-make-clang-compile-to-llvm-ir
 # clang preprocessor
 clang -C -E $file.cc > $file.ii 
 
