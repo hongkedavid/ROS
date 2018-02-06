@@ -32,10 +32,10 @@ supervisorctl stop $module
 exit (or Ctrl-D)
 
 # Stop and remove the docker container if needed
-sudo docker stop apollo_david_dev
-sudo docker container list
-sudo docker ps -aq -f status=exited
-sudo docker rm apollo_david_dev
+docker stop apollo_dev
+docker container list
+docker ps -aq -f status=exited
+docker rm apollo_dev
 
 # Optional: enable incoming traffic to port 8888
 sudo iptables -A INPUT -p tcp --dport 8888 -j ACCEPT
