@@ -56,3 +56,6 @@ opt -load $pass.so -$pass < $file.bc > $file_inst.bc
 
 # run llvm pass in one command line
 clang -Xclang -load -Xclang $pass.so $file.c
+
+# generate per-function CFG into dot file
+opt -dot-cfg-only $file.bc
