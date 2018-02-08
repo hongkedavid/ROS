@@ -36,6 +36,9 @@ clang -C -E $file.cc > $file.ii
 # llvm bitcode
 clang -O3 -emit-llvm $file.cc -c -o $file.bc
 
+# Clang IR
+clang -Os -S -emit-llvm $file.cc -o $file.ll
+
 # native assembly
 clang $file.cc -S -o $file.s
 
@@ -43,7 +46,8 @@ clang $file.cc -S -o $file.s
 clang $file.cc -o $file
 
 # view bitcode
-llvm-dis < $file.bc | less
+llvm-dis < $file.bc | cat > $file.ll
+clang -S -emit-llvm $file.cc -o $file.ll
 
 # bitcode to assembly
 llc $file.bc -o $file.s
