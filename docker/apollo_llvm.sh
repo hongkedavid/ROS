@@ -59,6 +59,7 @@ gcc $file.s -o $file
 opt -mem2reg $file.bc -o $file_ssa.bc
 
 # run llvm pass on llvm bitcode
+# Ref: https://stackoverflow.com/questions/9791528/why-optimizations-passes-doesnt-work-without-mem2reg
 opt -load $pass.so -$pass < $file.bc > $file_inst.bc
 
 # run llvm pass in one command line
