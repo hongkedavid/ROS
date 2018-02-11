@@ -33,7 +33,13 @@ clang -c -emit-llvm -std=c++11 -I /apollo/ -I /home/tmp/ -I /apollo/bazel-genfil
 # clang preprocessor
 clang -C -E $file.cc > $file.ii 
 
-# llvm bitcode
+# llvm bitcode with debug option
+clang -emit-llvm $file.cc -c -o $file.bc
+
+# llvm bitcode with debug option
+clang -g -emit-llvm $file.cc -c -o $file.bc
+
+# llvm bitcode with optimze option
 clang -O3 -emit-llvm $file.cc -c -o $file.bc
 
 # Clang IR
