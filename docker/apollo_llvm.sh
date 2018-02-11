@@ -55,6 +55,9 @@ llc $file.bc -o $file.s
 # assembly to executable
 gcc $file.s -o $file
 
+# convert LLVM IR into SSA form
+opt -mem2reg $file.bc -o $file_ssa.bc
+
 # run llvm pass on llvm bitcode
 opt -load $pass.so -$pass < $file.bc > $file_inst.bc
 
