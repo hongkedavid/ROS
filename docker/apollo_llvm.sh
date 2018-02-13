@@ -39,10 +39,11 @@ clang -emit-llvm $file.cc -c -o $file.bc
 # llvm bitcode with debug option
 clang -g -emit-llvm $file.cc -c -o $file.bc
 
-# llvm bitcode with optimze option
+# llvm bitcode with fastest-runtime optimze option
+# Ref: https://clang.llvm.org/docs/CommandGuide/clang.html
 clang -O3 -emit-llvm $file.cc -c -o $file.bc
 
-# Clang IR
+# Clang IR with reduce-code-size optimze option
 clang -Os -S -emit-llvm $file.cc -o $file.ll
 
 # native assembly
