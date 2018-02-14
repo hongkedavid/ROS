@@ -65,6 +65,9 @@ gcc $file.s -o $file
 # convert LLVM IR into SSA form
 opt -mem2reg $file.bc -o $file_ssa.bc
 
+# convert SSA form back to original
+opt -reg2mem $file_ssa.bc -o $file.bc
+
 # run llvm pass on llvm bitcode
 # Ref: https://stackoverflow.com/questions/9791528/why-optimizations-passes-doesnt-work-without-mem2reg
 opt -load $pass.so -$pass < $file.bc > $file_inst.bc
