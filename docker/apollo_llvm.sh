@@ -15,7 +15,7 @@ sudo apt install -y llvm-3.8-dev libclang-3.8-dev clang
 # cpu: k8, armeabi-v7a, x64_windows_msvc, x64_windows_msys, s390x, ios_x86_64
 bazel build --crosstool_top=@bazel_tools//tools/cpp:toolchain --cpu=k8 modules/monitor:all 
 
-# Per-module LLVM bitcode for Apollo
+# Per-module LLVM bitcode for Apollo, need to run in Apollo docker
 # Ref: https://clang.llvm.org/docs/CommandGuide/clang.html
 clang -c -emit-llvm -std=c++11 -I /apollo/ -I /home/tmp/ -I /apollo/bazel-genfiles -I /home/david/.cache/bazel/_bazel_david/540135163923dd7d5820f3ee4b306b32/external/com_google_protobuf/src/ /apollo/modules/monitor/monitor.cc -o /apollo/modules/monitor/monitor.bc
 clang -c -emit-llvm -std=c++11 -I /apollo/ -I /home/tmp/ -I /apollo/bazel-genfiles -I /home/david/.cache/bazel/_bazel_david/540135163923dd7d5820f3ee4b306b32/external/com_google_protobuf/src/ -I /home/david/.cache/bazel/_bazel_david/540135163923dd7d5820f3ee4b306b32/external/civetweb/include/ /apollo/modules/dreamview/backend/hmi/hmi.cc -o /apollo/modules/dreamview/backend/hmi/hmi.bc
