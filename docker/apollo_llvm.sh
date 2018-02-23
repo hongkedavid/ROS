@@ -28,6 +28,18 @@ clang -c -emit-llvm -std=c++11 -I /apollo/ -I /home/tmp/ -I /apollo/bazel-genfil
 clang -c -emit-llvm -std=c++11 -I /apollo/ -I /home/tmp/ -I /apollo/bazel-genfiles -I /home/david/.cache/bazel/_bazel_david/540135163923dd7d5820f3ee4b306b32/external/com_google_protobuf/src/ -I /home/david/.cache/bazel/_bazel_david/540135163923dd7d5820f3ee4b306b32/external/eigen/ -I /usr/local/include/pcl-1.7/ /apollo/modules/perception/perception.cc -o /apollo/modules/perception/perception.bc
 clang -c -emit-llvm -std=c++11 -I /apollo/ -I /home/tmp/ -I /apollo/bazel-genfiles -I /home/david/.cache/bazel/_bazel_david/540135163923dd7d5820f3ee4b306b32/external/com_google_protobuf/src/ /apollo/modules/third_party_perception/third_party_perception.cc -o /apollo/modules/third_party_perception/third_party_perception.bc
 
+# LLVM bitcode for protocol buffer source code
+clang -c -emit-llvm -std=c++11 -I /apollo/bazel-genfiles -I /home/david/.cache/bazel/_bazel_david/540135163923dd7d5820f3ee4b306b32/external/com_google_protobuf/src/ /apollo/bazel-genfiles/modules/control/proto/pad_msg.pb.cc -o pad_msg.pb.bc
+clang -c -emit-llvm -std=c++11 -I /apollo/bazel-genfiles -I /home/david/.cache/bazel/_bazel_david/540135163923dd7d5820f3ee4b306b32/external/com_google_protobuf/src/ /apollo/bazel-genfiles/modules/control/proto/control_cmd.pb.cc -o control_cmd.pb.bc
+clang -c -emit-llvm -std=c++11 -I /apollo/bazel-genfiles -I /home/david/.cache/bazel/_bazel_david/540135163923dd7d5820f3ee4b306b32/external/com_google_protobuf/src/ /apollo/bazel-genfiles/modules/canbus/proto/chassis.pb.cc -o chassis.pb.bc
+clang -c -emit-llvm -std=c++11 -I /apollo/bazel-genfiles -I /home/david/.cache/bazel/_bazel_david/540135163923dd7d5820f3ee4b306b32/external/com_google_protobuf/src/ /apollo/bazel-genfiles/modules/localization/proto/localization.pb.cc -o localization.pb.bc
+clang -c -emit-llvm -std=c++11 -I /apollo/bazel-genfiles -I /home/david/.cache/bazel/_bazel_david/540135163923dd7d5820f3ee4b306b32/external/com_google_protobuf/src/ /apollo/bazel-genfiles/modules/planning/proto/planning.pb.cc -o planning.pb.bc
+clang -c -emit-llvm -std=c++11 -I /apollo/bazel-genfiles -I /home/david/.cache/bazel/_bazel_david/540135163923dd7d5820f3ee4b306b32/external/com_google_protobuf/src/ /apollo/bazel-genfiles/modules/control/proto/control_conf.pb.cc -o control_conf.pb.bc
+
+clang -c -emit-llvm -std=c++11 -I /apollo/ -I /apollo/bazel-genfiles -I /home/david/.cache/bazel/_bazel_david/540135163923dd7d5820f3ee4b306b32/external/com_google_protobuf/src/ -I /home/david/.cache/bazel/_bazel_david/540135163923dd7d5820f3ee4b306b32/external/eigen/ /apollo/modules/common/vehicle_state/vehicle_state_provider.cc -o vehicle_state_provider.bc
+clang -c -emit-llvm -std=c++11 -I /apollo/ -I /home/tmp/ -I /apollo/bazel-genfiles -I /home/david/.cache/bazel/_bazel_david/540135163923dd7d5820f3ee4b306b32/external/com_google_protobuf/src/ /apollo/modules/common/adapters/adapter_manager.cc -o adapter_manager.bc
+clang -c -emit-llvm -std=c++11 -I /apollo/ modules/control/controller/controller_agent.cc controller_agent.bc
+
 # Ref: https://llvm.org/docs/GettingStarted.html
 # Ref: https://stackoverflow.com/questions/9148890/how-to-make-clang-compile-to-llvm-ir
 # clang preprocessor
