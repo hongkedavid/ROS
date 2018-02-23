@@ -38,7 +38,8 @@ clang -c -emit-llvm -std=c++11 -I /apollo/bazel-genfiles -I /home/david/.cache/b
 
 clang -c -emit-llvm -std=c++11 -I /apollo/ -I /apollo/bazel-genfiles -I /home/david/.cache/bazel/_bazel_david/540135163923dd7d5820f3ee4b306b32/external/com_google_protobuf/src/ -I /home/david/.cache/bazel/_bazel_david/540135163923dd7d5820f3ee4b306b32/external/eigen/ /apollo/modules/common/vehicle_state/vehicle_state_provider.cc -o vehicle_state_provider.bc
 clang -c -emit-llvm -std=c++11 -I /apollo/ -I /home/tmp/ -I /apollo/bazel-genfiles -I /home/david/.cache/bazel/_bazel_david/540135163923dd7d5820f3ee4b306b32/external/com_google_protobuf/src/ /apollo/modules/common/adapters/adapter_manager.cc -o adapter_manager.bc
-clang -c -emit-llvm -std=c++11 -I /apollo/ modules/control/controller/controller_agent.cc controller_agent.bc
+clang -c -emit-llvm -std=c++11 -I /apollo/ -I /home/tmp/ -I /apollo/bazel-genfiles /apollo/modules/control/controller/controller_agent.cc -o controller_agent.bc
+clang -c -emit-llvm -std=c++11 -I /apollo/ -I /home/tmp/ -I /apollo/bazel-genfiles -I /home/david/.cache/bazel/_bazel_david/540135163923dd7d5820f3ee4b306b32/external/com_google_protobuf/src/ -I /apollo/bazel-genfiles/external/com_github_gflags_gflags/ -I /home/david/.cache/bazel/_bazel_david/540135163923dd7d5820f3ee4b306b32/external/eigen/ /apollo/modules/common/apollo_app.cc -o apollo_app.bc
 
 # Ref: https://llvm.org/docs/GettingStarted.html
 # Ref: https://stackoverflow.com/questions/9148890/how-to-make-clang-compile-to-llvm-ir
