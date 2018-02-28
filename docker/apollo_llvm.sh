@@ -78,6 +78,14 @@ llc $file.bc -o $file.s
 # assembly to executable
 gcc $file.s -o $file
 
+# Combine multiple bitcode files into one bitcode file using LLVM Gold Plugin
+# Ref: https://llvm.org/docs/GoldPlugin.html
+# Ref: https://github.com/SVF-tools/SVF/wiki/Install-LLVM-Gold-Plugin-on-Ubuntu
+# Ref: https://stackoverflow.com/questions/9148890/how-to-make-clang-compile-to-llvm-ir
+clang -flto -c a.c -o a.bc
+clang -flto -c b.c -o b.bc
+clang -flto -Wl,-plugin-opt=also-emit-llvm a.bc b.bc -o c
+
 # convert LLVM IR into SSA form
 opt -mem2reg $file.bc -o $file_ssa.bc
 
