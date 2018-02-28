@@ -82,9 +82,9 @@ gcc $file.s -o $file
 # Ref: https://llvm.org/docs/GoldPlugin.html
 # Ref: https://github.com/SVF-tools/SVF/wiki/Install-LLVM-Gold-Plugin-on-Ubuntu
 # Ref: https://stackoverflow.com/questions/9148890/how-to-make-clang-compile-to-llvm-ir
-clang -flto -c a.c -o a.bc
-clang -flto -c b.c -o b.bc
-clang -flto -Wl,-plugin-opt=also-emit-llvm a.bc b.bc -o c
+clang -flto -c $file1.cc -o $file1.bc
+clang -flto -c $file2.cc -o $file2.bc
+clang -flto -Wl,-plugin-opt=also-emit-llvm $file1.bc $file2.bc -o $file3
 
 # convert LLVM IR into SSA form
 opt -mem2reg $file.bc -o $file_ssa.bc
