@@ -37,5 +37,11 @@ docker container list
 docker ps -aq -f status=exited
 docker rm apollo_dev
 
+# Remove docker instance and image
+docker container ls -a
+docker rm $instance
+docker images
+docker rmi $image
+
 # Optional: enable incoming traffic to port 8888
 sudo iptables -A INPUT -p tcp --dport 8888 -j ACCEPT
