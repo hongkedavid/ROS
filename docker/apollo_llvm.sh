@@ -92,6 +92,10 @@ opt -mem2reg $file.bc -o $file_ssa.bc
 # convert SSA form back to original
 opt -reg2mem $file_ssa.bc -o $file.bc
 
+# devirtualize bitcode (require at least LLVM 4.0)
+clang -c -emit-llvm -flto -std=c++11 -fwhole-program-vtables -I $include_dir $src_file -o $file.bc
+opt -wholeprogramdevirt $file.bc -o $file_devirt.bc
+
 # run llvm pass on llvm bitcode
 # Ref: https://stackoverflow.com/questions/9791528/why-optimizations-passes-doesnt-work-without-mem2reg
 opt -load $pass.so -$pass < $file.bc > $file_inst.bc
