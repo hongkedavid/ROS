@@ -94,6 +94,7 @@ opt -reg2mem $file_ssa.bc -o $file.bc
 
 # devirtualize bitcode (require at least LLVM 4.0)
 clang -c -emit-llvm -flto -std=c++11 -fwhole-program-vtables -I $include_dir $src_file -o $file.bc
+clang -c -emit-llvm -flto -std=c++11 -fstrict-vtable-pointers -I $include_dir $src_file -o $file.bc
 opt -wholeprogramdevirt $file.bc -o $file_devirt.bc
 
 # run llvm pass on llvm bitcode
