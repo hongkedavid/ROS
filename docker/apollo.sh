@@ -28,6 +28,10 @@ bash scripts/bootstrap.sh stop
 # Start/Stop a particular module
 supervisorctl start/stop $module
 
+# Check status of a particular module
+supervisorctl status $module 
+ps aux | grep $module
+
 # Detach from the container
 exit (or Ctrl-D)
 
