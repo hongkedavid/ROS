@@ -25,8 +25,8 @@ rosbag play -l ./docs/demo_guide/demo_2.0.bag
 # Stop module monitor
 bash scripts/bootstrap.sh stop
 
-# Stop a particular module
-supervisorctl stop $module
+# Start/Stop a particular module
+supervisorctl start/stop $module
 
 # Detach from the container
 exit (or Ctrl-D)
