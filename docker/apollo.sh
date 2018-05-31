@@ -26,7 +26,7 @@ rosbag play -l ./docs/demo_guide/demo_2.0.bag
 bash scripts/bootstrap.sh stop
 
 # Start/Stop a particular module
-# $module: dreamview, monitor, prediction, routing, planning, control
+# $module: dreamview, monitor, localization, prediction, routing, planning, control
 supervisorctl start/stop $module
 
 # Check status of a particular module
