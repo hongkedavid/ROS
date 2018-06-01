@@ -93,9 +93,12 @@ opt -mem2reg $file.bc -o $file_ssa.bc
 opt -reg2mem $file_ssa.bc -o $file.bc
 
 # devirtualize bitcode (require at least LLVM 4.0)
-clang -c -emit-llvm -flto -std=c++11 -fwhole-program-vtables -I $include_dir $src_file -o $file.bc
-clang -c -emit-llvm -flto -std=c++11 -fstrict-vtable-pointers -I $include_dir $src_file -o $file.bc
+clang -c -emit-llvm -flto -fwhole-program-vtables -I $include_dir $src_file -o $file.bc
+clang -c -emit-llvm -flto -fstrict-vtable-pointers -I $include_dir $src_file -o $file.bc
 opt -wholeprogramdevirt $file.bc -o $file_devirt.bc
+
+# dump vtable
+ clang++ -Xclang -fdump-vtable-layouts -c -I $include_dir $file.bc > $file.vtable
 
 # run llvm pass on llvm bitcode
 # Ref: https://stackoverflow.com/questions/9791528/why-optimizations-passes-doesnt-work-without-mem2reg
