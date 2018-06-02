@@ -77,3 +77,6 @@ sudo iptables -A INPUT -p tcp --dport 8888 -j ACCEPT
 
 # After starting dreamview, check port status
 sudo netstat -tulpn | grep 8888
+
+# Remove Apollo logs at a specific date
+find . -name "*$date*" -print0 | xargs -0 rm
