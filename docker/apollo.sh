@@ -7,7 +7,7 @@ bash docker/scripts/dev_start.sh
 # Attach to the container
 bash docker/scripts/dev_into.sh
 
-# Within docker container
+############### Inside Apollo container ############
 # Start ROS and monitor/dreamview
 # Tune master timeout value if needed (ref: https://github.com/ApolloAuto/apollo/issues/2500)
 bash scripts/bootstrap.sh
@@ -19,8 +19,11 @@ bash ./docs/demo_guide/rosbag_helper.sh download
 # Ref: https://github.com/ApolloAuto/apollo/issues/181
 source /apollo/bazel-apollo/external/ros/setup.bash
 
-# Relay demo rosbag and go to http://localhost:8888
-rosbag play -l ./docs/demo_guide/demo_2.0.bag
+# Relay demo rosbag and slow down replay speed by 10 times
+rosbag play -l ./docs/demo_guide/demo_2.0.bag -r 0.1
+
+# Start/Stop sim_control
+bash /apollo/scripts/dreamview_sim_control.sh start/stop
 
 # Stop module monitor
 bash scripts/bootstrap.sh stop
@@ -33,9 +36,23 @@ supervisorctl start/stop $module
 supervisorctl status $module 
 ps aux | grep $module
 
+# Example
+supervisorctl start/stop localization
+supervisorctl start/stop perception
+supervisorctl start/stop prediction
+supervisorctl start/stop routing
+supervisorctl start/stop planning
+supervisorctl start/stop control
+supervisorctl start/stop dreamview
+supervisorctl start/stop monitor
+
+# Start/stop recording
+scripts/record_bag.sh start/stop
+
 # Detach from the container
 exit (or Ctrl-D)
 
+############### Outside Apollo container ############
 # Stop and remove the docker container if needed
 docker stop apollo_dev
 docker container list
@@ -60,4 +77,3 @@ sudo iptables -A INPUT -p tcp --dport 8888 -j ACCEPT
 
 # After starting dreamview, check port status
 sudo netstat -tulpn | grep 8888
-
