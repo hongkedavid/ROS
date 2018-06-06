@@ -100,7 +100,7 @@ clang -c -emit-llvm -flto -fstrict-vtable-pointers -I $include_dir $src_file -o 
 opt -wholeprogramdevirt $file.bc -o $file_devirt.bc
 
 # Ref: https://groups.google.com/forum/#!topic/llvm-dev/Z7O338-BYkQ
-clang++ -c -fvisibility=hidden -emit-llvm -flto -fwhole-program-vtables -I $include_dir $src_file -o $file.bc
+clang -c -fvisibility=hidden -emit-llvm -flto -fwhole-program-vtables -I $include_dir $src_file -o $file.bc
 
 # dump vtable
 clang++ -Xclang -fdump-vtable-layouts -c -I $include_dir $file.bc > $file.vtable
