@@ -15,5 +15,5 @@ sudo ln -s /opt/cmake-3.11.3-Linux-x86_64/bin/* /usr/bin/
 cd llvm-4.0.0.src
 mkdir build
 cd build
-cmake llvm-4.0.0.src/
-. -- -j32
+/opt/cmake-3.11.3-Linux-x86_64/bin/cmake llvm-4.0.0.src/
+/opt/cmake-3.11.3-Linux-x86_64/bin/cmake --build . -- -j32
