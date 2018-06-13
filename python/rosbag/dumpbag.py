@@ -32,15 +32,20 @@ from std_msgs.msg import String
 def write_to_file(file_path, topic_pb):
     """write pb message to file"""
     f = file(file_path, 'w')
-    f.write(str(topic_pb))
+    # ROS bag format: (datatype, data, md5sum, position, msg_type)
+    # Ref: "msg = info.datatype, data, info.md5sum, position, msg_type" in rosbag/bag.py
+#    f.write(str(topic_pb))
+    # Dump only protocol buffer messages
+    # data field: length of pb + 0x00 + 0x00 + 0x00 + pb
+    f.write(topic_pb[1][4:])
     f.close()
 
 
-def dump_bag(in_bag, out_dir, start_time, duration, filter_topic):
+def dump_bag(in_bag, out_dir, start_time, duration, filter_topic, raw_bag):
     """out_bag = in_bag + routing_bag"""
     bag = rosbag.Bag(in_bag, 'r')
     seq = 0
-    for topic, msg, t in bag.read_messages():
+    for topic, msg, t in bag.read_messages(raw=raw_bag):
         t_sec = t.secs + t.nsecs / 1.0e9;
         if start_time and t_sec < start_time:
             print "not yet reached the start time"
@@ -79,9 +84,11 @@ if __name__ == "__main__":
         help="""the topic that you want to dump. If this option is not provided,
         the tool will dump all the messages regardless of the message topic."""
     )
+    parser.add_argument(
+        "--raw_bag", action="store", type=bool, default=False, help="the input ros bag")
     args = parser.parse_args()
 
     if os.path.exists(args.out_dir):
         shutil.rmtree(args.out_dir)
     os.makedirs(args.out_dir)
-    dump_bag(args.in_rosbag, args.out_dir, args.start_time, args.duration, args.topic)
+    dump_bag(args.in_rosbag, args.out_dir, args.start_time, args.duration, args.topic, args.raw_bag)
