@@ -18,3 +18,10 @@ bazel build modules/control/tools:control_tester
 # Related issue: https://github.com/ApolloAuto/apollo/issues/2629
 bazel build modules/perception:all
 bazel build modules/dreamview:all
+
+# Build Apollo ROS platform
+# Ref: https://github.com/ApolloAuto/apollo/blob/d49f5957f2aa027a509825b08b60ddb3e51d5331/docs/quickstart/apollo_1_0_quick_start_developer.md
+# Ref: https://answers.ros.org/question/59031/how-do-i-limit-the-number-of-cores-used-in-the-build-process-by-catkin/
+export ROS_PARALLEL_JOBS=-j64
+cd ros
+bash build.sh build
