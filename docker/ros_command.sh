@@ -1,5 +1,8 @@
 # List active ROS nodes
 rosnode list
+# To get process ID of a ROS node
+# Ref: https://answers.ros.org/question/271776/how-can-i-retrieve-a-list-of-process-ids-of-ros-nodes/
+rosnode info $node_name 2>/dev/null | grep Pid | cut -d' ' -f2
 
 # Ref: http://wiki.ros.org/rostopic
 rostopic echo $topic_name
