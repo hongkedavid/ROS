@@ -73,10 +73,12 @@ docker save apolloauto/apollo:dev-x86_64-20180103_1300 | gzip -c > apollo_dev-x8
 gunzip -c apollo_dev-x86_64-20180103_1300.tgz | docker load
 
 # Optional: enable incoming traffic to port 8888
+sudo iptables -S | grep 8888
 sudo iptables -A INPUT -p tcp --dport 8888 -j ACCEPT
 
 # After starting dreamview, check port status
 sudo netstat -tulpn | grep 8888
+sudo ufw reload
 
 # Remove Apollo logs at a specific date
 find . -name "*$date*" -print0 | xargs -0 rm
