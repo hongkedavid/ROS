@@ -12,3 +12,7 @@ python dumpbag.py demo.bag demobag_out/ --raw_bag=True
 
 # Dump ros bag files with binary output
 python writebag.py demo.bag demo.np.bag --raw_bag=True
+
+# Generate python API for protobuf
+# Ref: https://developers.google.com/protocol-buffers/docs/reference/python-generated
+protoc --proto_path=/apollo/modules/common/proto --python_out=build/gen src/foo.proto src/bar/baz.proto
