@@ -13,5 +13,9 @@ cd /apollo/
 # Ref: https://developers.google.com/protocol-buffers/docs/reference/python-generated
 /usr/local/bin/protoc --proto_path=src --python_out=build src/header.proto
 
+# Generate C++ API for protocol buffer
+# Ref: https://developers.google.com/protocol-buffers/docs/reference/cpp-generated
+/usr/local/bin/protoc --proto_path=src --cpp_out=build src/header.proto
+
 # Dump ros bag files with binary output
 python writebag.py demo.bag demo.np.bag --raw_bag=True
