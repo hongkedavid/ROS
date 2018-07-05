@@ -2,10 +2,12 @@
 python dumpbag.py demo.bag demobag_out/ --raw_bag=True
 
 # Decode protocol buffer message
-/usr/local/bin/protoc --decode=apollo.drivers.gnss.Gnss gnss.proto < gnss_msg.bin > gnss_msb.pb.txt
+cd /apollo/
+/usr/local/bin/protoc --decode=apollo.drivers.gnss.Gnss modules/drivers/gnss/proto/gnss.proto < gnss_msg.bin > gnss_msb.pb.txt
 
 # Encode protocol buffer message
-/usr/local/bin/protoc --encode=apollo.drivers.gnss.Gnss gnss.proto < gnss_msb.pb.txt > gnss_msg.bin
+cd /apollo/
+/usr/local/bin/protoc --encode=apollo.drivers.gnss.Gnss modules/drivers/gnss/proto/gnss.proto < gnss_msb.pb.txt > gnss_msg.bin
 
 # Generate python API for protocol buffer
 # Ref: https://developers.google.com/protocol-buffers/docs/reference/python-generated
