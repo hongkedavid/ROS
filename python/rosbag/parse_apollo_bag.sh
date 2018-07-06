@@ -21,4 +21,5 @@ cd /apollo/
 python writebag.py demo.bag demo.np.bag --raw_bag=True
 
 # Compile a C++ program invoking protobuf C++ API 
+# Ref: https://stackoverflow.com/questions/39261897/c-protobuf-undefined-reference-to-constructor-destructor
 g++ -I /apollo/bazel-genfiles/ -o $bin $src /apollo/bazel-genfiles/modules/routing/proto/routing.pb.cc /apollo/bazel-genfiles/modules/common/proto/header.pb.cc /apollo/bazel-genfiles/modules/common/proto/geometry.pb.cc /apollo/bazel-genfiles/modules/common/proto/error_code.pb.cc -lprotobuf
