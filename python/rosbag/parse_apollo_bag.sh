@@ -19,3 +19,6 @@ cd /apollo/
 
 # Dump ros bag files with binary output
 python writebag.py demo.bag demo.np.bag --raw_bag=True
+
+# Compile a C++ program invoking protobuf C++ API 
+g++ -I /apollo/bazel-genfiles/ -o $bin $src /apollo/bazel-genfiles/modules/routing/proto/routing.pb.cc /apollo/bazel-genfiles/modules/common/proto/header.pb.cc /apollo/bazel-genfiles/modules/common/proto/geometry.pb.cc /apollo/bazel-genfiles/modules/common/proto/error_code.pb.cc -lprotobuf
