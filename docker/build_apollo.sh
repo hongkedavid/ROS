@@ -25,5 +25,5 @@ bazel build modules/dreamview:all
 export ROS_PARALLEL_JOBS=-j64
 cd ros
 bash build.sh build
-cd build_isolated/roscpp && ../../ros/install/ros_x86_64/env.sh make -j64 -l64
+cd /apollo/apollo-platform-2.1.2/ros/build_isolated/roscpp && /apollo/apollo-platform-2.1.2/ros/install/ros_x86_64/env.sh make cmake_check_build_system
 cd /apollo/apollo-platform-2.1.2/ros/build_isolated/roscpp && /apollo/apollo-platform-2.1.2/ros/install/ros_x86_64/env.sh make -j64 -l64
