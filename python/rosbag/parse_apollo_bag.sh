@@ -23,3 +23,12 @@ python writebag.py demo.bag demo.np.bag --raw_bag=True
 # Compile a C++ program invoking protobuf C++ API 
 # Ref: https://stackoverflow.com/questions/39261897/c-protobuf-undefined-reference-to-constructor-destructor
 g++ -I /apollo/bazel-genfiles/ -o $bin $src /apollo/bazel-genfiles/modules/routing/proto/routing.pb.cc /apollo/bazel-genfiles/modules/common/proto/header.pb.cc /apollo/bazel-genfiles/modules/common/proto/geometry.pb.cc /apollo/bazel-genfiles/modules/common/proto/error_code.pb.cc -lprotobuf
+
+# Parse *.pb.txt 
+cd /apollo
+s1=$(ls -l bazel-apollo | cut -d'.' -f1 | cut -d'>' -f2 | cut -d' ' -f2)
+s2=$(ls -l bazel-apollo | cut -d'.' -f2)
+dir=$(echo "$s1.$s2")
+n=$(echo $dir | grep -o '/' | wc -l);
+build_dir=$(echo $dir | cut -d'/' -f1-$(($n-1)))
+g++ -I /apollo/bazel-genfiles/ -I /apollo/ -I $build_dir/external/com_google_protobuf/src/ -o test test.c /apollo/bazel-genfiles/modules/canbus/proto/chassis.pb.cc /apollo/bazel-genfiles/modules/common/proto/drive_state.pb.cc /apollo/bazel-genfiles/modules/common/proto/geometry.pb.cc /apollo/bazel-genfiles/modules/common/proto/header.pb.cc /apollo/bazel-genfiles/modules/common/proto/pnc_point.pb.cc /apollo/bazel-genfiles/modules/common/proto/vehicle_signal.pb.cc /apollo/bazel-genfiles/modules/map/proto/map_id.pb.cc /apollo/bazel-genfiles/modules/planning/proto/decision.pb.cc /apollo/bazel-genfiles/modules/planning/proto/planning_internal.pb.cc -lprotobuf
