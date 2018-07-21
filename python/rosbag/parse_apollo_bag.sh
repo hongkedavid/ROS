@@ -31,4 +31,31 @@ s2=$(ls -l bazel-apollo | cut -d'.' -f2)
 dir=$(echo "$s1.$s2")
 n=$(echo $dir | grep -o '/' | wc -l);
 build_dir=$(echo $dir | cut -d'/' -f1-$(($n-1)))
-g++ -std=c++11 -I /apollo/bazel-genfiles/ -I /apollo/ -I $build_dir/external/com_google_protobuf/src/ -o test test.c /apollo/bazel-genfiles/modules/canbus/proto/chassis.pb.cc /apollo/bazel-genfiles/modules/common/proto/drive_state.pb.cc /apollo/bazel-genfiles/modules/common/proto/geometry.pb.cc /apollo/bazel-genfiles/modules/common/proto/header.pb.cc /apollo/bazel-genfiles/modules/common/proto/pnc_point.pb.cc /apollo/bazel-genfiles/modules/common/proto/vehicle_signal.pb.cc /apollo/bazel-genfiles/modules/map/proto/map_id.pb.cc /apollo/bazel-genfiles/modules/planning/proto/decision.pb.cc /apollo/bazel-genfiles/modules/planning/proto/planning_internal.pb.cc -lprotobuf
+g++ -std=c++11 -I /apollo/bazel-genfiles/ -I /apollo/ -I $build_dir/external/com_google_protobuf/src/ -o test test.c 
+/apollo/bazel-genfiles/modules/canbus/proto/chassis.pb.cc 
+/apollo/bazel-genfiles/modules/common/proto/drive_state.pb.cc 
+/apollo/bazel-genfiles/modules/common/proto/geometry.pb.cc 
+/apollo/bazel-genfiles/modules/common/proto/header.pb.cc 
+/apollo/bazel-genfiles/modules/common/proto/pnc_point.pb.cc 
+/apollo/bazel-genfiles/modules/common/proto/vehicle_signal.pb.cc 
+/apollo/bazel-genfiles/modules/planning/proto/decision.pb.cc 
+/apollo/bazel-genfiles/modules/planning/proto/planning_internal.pb.cc 
+/apollo/bazel-genfiles/modules/planning/proto/sl_boundary.pb.cc 
+/apollo/bazel-genfiles/modules/map/relative_map/proto/navigation.pb.cc
+/apollo/bazel-genfiles/modules/perception/proto/perception_obstacle.pb.cc
+/apollo/bazel-genfiles/modules/perception/proto/traffic_light_detection.pb.cc
+/apollo/bazel-genfiles/modules/map/proto/map.pb.cc
+/apollo/bazel-genfiles/modules/map/proto/map_clear_area.pb.cc
+/apollo/bazel-genfiles/modules/map/proto/map_lane.pb.cc
+/apollo/bazel-genfiles/modules/map/proto/map_speed_bump.pb.cc
+/apollo/bazel-genfiles/modules/map/proto/map_crosswalk.pb.cc
+/apollo/bazel-genfiles/modules/map/proto/map_overlap.pb.cc
+/apollo/bazel-genfiles/modules/map/proto/map_speed_control.pb.cc
+/apollo/bazel-genfiles/modules/map/proto/map_geometry.pb.cc
+/apollo/bazel-genfiles/modules/map/proto/map_stop_sign.pb.cc
+/apollo/bazel-genfiles/modules/map/proto/map_id.pb.cc
+/apollo/bazel-genfiles/modules/map/proto/map_road.pb.cc
+/apollo/bazel-genfiles/modules/map/proto/map_yield_sign.pb.cc
+/apollo/bazel-genfiles/modules/map/proto/map_junction.pb.cc
+/apollo/bazel-genfiles/modules/map/proto/map_signal.pb.cc
+-lprotobuf
