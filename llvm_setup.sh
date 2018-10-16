@@ -1,3 +1,4 @@
+# Ref: http://releases.llvm.org/3.4/tools/clang/docs/ReleaseNotes.html
 # Install Clang and LLVM 3.4 on Ubuntu 14
 sudo apt-get install llvm clang
 cd /usr/share/llvm-3.4/cmake
