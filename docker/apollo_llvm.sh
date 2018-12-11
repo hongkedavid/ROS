@@ -115,5 +115,15 @@ opt -load $pass.so -$pass < $file.bc > $file_inst.bc
 # run llvm pass in one command line
 clang -Xclang -load -Xclang $pass.so $file.c
 
-# generate per-function CFG into dot file
+# Ref: https://llvm.org/docs/Passes.html
+# generate per-function CFG (without function definition) into dot file
 opt -dot-cfg-only $file.bc
+
+# generate per-function CFG (with function definition) into dot file
+opt -dot-cfg $file.bc
+
+# generate call graph into dot file
+opt -dot-callgraph $file.bc
+
+# convert dot to pdf file
+dot -Tpdf $file.dot -o $file.pdf
