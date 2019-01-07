@@ -86,10 +86,10 @@ clang -flto -c $file1.cc -o $file1.bc
 clang -flto -c $file2.cc -o $file2.bc
 clang -flto -Wl,-plugin-opt=also-emit-llvm $file1.bc $file2.bc -o $file3
 
-# convert LLVM IR into SSA form
+# generate “pruned” SSA form
 opt -mem2reg $file.bc -o $file_ssa.bc
 
-# convert SSA form back to original
+# convert “pruned” SSA form back to original
 opt -reg2mem $file_ssa.bc -o $file.bc
 
 # devirtualize bitcode (require at least LLVM 4.0)
