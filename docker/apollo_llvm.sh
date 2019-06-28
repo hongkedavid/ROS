@@ -3,6 +3,14 @@
 sudo apt-get update
 sudo apt install -y llvm-3.8-dev libclang-3.8-dev clang
 
+# LLVM debug build
+# https://llvm.org/docs/CMake.html
+mkdir mybuilddir
+cd mybuilddir
+cmake -DCMAKE_BUILD_TYPE=Debug $llvm-src-dir
+cmake --build .
+cmake --build . --target install
+
 # CROSSTOOL config does not work, seems hard to reconfigure bazel_tools
 # Ref: https://github.com/bazelbuild/bazel/issues/3566
 # Ref: https://stackoverflow.com/questions/45710957/how-to-generate-llvm-ir-binary-bc-while-compiling-project-with-bazel 
