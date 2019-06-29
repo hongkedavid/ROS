@@ -4,12 +4,18 @@ sudo apt-get update
 sudo apt install -y llvm-3.8-dev libclang-3.8-dev clang
 
 # LLVM debug build
+# https://github.com/llvm/llvm-project/blob/master/clang/INSTALL.txt
 # https://llvm.org/docs/CMake.html
-mkdir mybuilddir
-cd mybuilddir
-cmake -DCMAKE_BUILD_TYPE=Debug $llvm-src-dir
+wget http://releases.llvm.org/3.4.2/cfe-3.4.2.src.tar.gz
+wget http://releases.llvm.org/3.4.2/llvm-3.4.2.src.tar.gz
+tar xf cfe-3.4.2.src.tar.gz
+tar xf llvm-3.4.2.src.tar.gz
+mv cfe-3.4.2.src llvm-3.4.2.src/tools/clang
+mkdir llvm_build
+cd llvm_build
+cmake -DCMAKE_BUILD_TYPE=Debug llvm-3.4.2.src
 cmake --build .
-cmake --build . --target install
+sudo cmake --build . --target install
 
 # CROSSTOOL config does not work, seems hard to reconfigure bazel_tools
 # Ref: https://github.com/bazelbuild/bazel/issues/3566
