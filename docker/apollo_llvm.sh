@@ -13,7 +13,7 @@ tar xf llvm-3.4.2.src.tar.gz
 mv cfe-3.4.2.src llvm-3.4.2.src/tools/clang
 mkdir llvm_build
 cd llvm_build
-cmake -DCMAKE_BUILD_TYPE=Debug llvm-3.4.2.src
+cmake -DCMAKE_BUILD_TYPE=Debug ../llvm-3.4.2.src
 cmake --build .
 sudo cmake --build . --target install
 
