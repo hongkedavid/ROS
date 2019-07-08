@@ -16,3 +16,19 @@ exit
 
 # Run a container
 docker exec -t -i $container_name /bin/bash
+
+# Lista all create containers
+docker ps -a
+
+# List all exited containers
+docker ps -a -q -f status=exited
+
+# Remove dangling docker images
+docker rmi $(docker images -f "dangling=true" -q)
+
+# Remove exited containers, use with caution
+docker rm -v $(docker ps -a -q -f status=exited)
+
+# Remove dangling volume
+# Ref: https://forums.meteor.com/t/low-disk-space-docker-container-increasing-in-size-everyday/24424/8
+docker volume rm $(docker volume ls -qf dangling=true)
