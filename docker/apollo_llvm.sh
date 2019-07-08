@@ -93,6 +93,7 @@ clang -C -E $file.cc > $file.ii
 clang -emit-llvm $file.cc -c -o $file.bc
 
 # Emit llvm bitcode with debug option
+# Source-level mapping ref: https://llvm.org/docs/SourceLevelDebugging.html
 clang -g -emit-llvm $file.cc -c -o $file.bc
 
 # llvm bitcode with fastest-runtime optimze option
