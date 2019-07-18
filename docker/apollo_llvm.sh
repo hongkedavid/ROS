@@ -32,6 +32,7 @@ bazel build --define ARCH=x86_64 --define CAN_CARD=fake_can --cxxopt=-DUSE_ESD_C
 bazel build --define ARCH=x86_64 --define CAN_CARD=fake_can --cxxopt=-DUSE_ESD_CAN=false --copt=-mavx2 --copt=-mno-sse3 --cxxopt=-DCPU_ONLY --crosstool_top=tools/wllvm:toolchain //modules/drivers/radar/racobit_radar:racobit_radar
 bazel build --define ARCH=x86_64 --define CAN_CARD=fake_can --cxxopt=-DUSE_ESD_CAN=false --cxxopt=-DCPU_ONLY --crosstool_top=tools/wllvm:toolchain //modules/dreamview:dreamview
 
+
 # Build LLVM bitcode for v3.5
 # Comment c++1y in tools/bazel.rc
 bash apollo.sh build_no_perception --copt=-mavx2 --cxxopt=-mavx2 --copt=-mno-sse3 --crosstool_top=tools/wllvm:toolchain
@@ -119,6 +120,22 @@ llc $file.bc -o $file.s
 
 # assembly to executable
 gcc $file.s -o $file
+
+# Run bitcode directly 
+lli $file.bc
+
+# bitcode to object file and executable
+# Ref: https://stackoverflow.com/questions/32523847/how-to-make-llvm-bc-file-executable
+llc -filetype=obj $file.bc
+g++ -o a.out $file.o
+
+# Linking with shared object files to executable 
+# Ref: https://stackoverflow.com/questions/14564063/undefined-reference-while-linking-with-a-shared-object
+g++ $file.o ./myshared.so -Wl,-rpath . -o a.out
+
+# Build shared object files
+# Ref: https://stackoverflow.com/questions/2583770/making-a-shared-library-from-existing-object-files
+g++ -shared -fPIC -o myshared.so *.o
 
 # Combine multiple bitcode files into one bitcode file using LLVM Gold Plugin
 # Ref: https://llvm.org/docs/GoldPlugin.html
