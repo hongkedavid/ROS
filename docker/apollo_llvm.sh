@@ -186,3 +186,14 @@ opt -dot-callgraph $file.bc
 
 # convert dot to pdf file
 dot -Tpdf $file.dot -o $file.pdf
+
+# Show dynamically linked libs
+# Ref: https://stackoverflow.com/questions/1124571/get-list-of-static-libraries-used-in-an-executable
+ldd $binary
+ldd -r -d $binary
+ldd -r -d $file.so
+
+# Show symbols in a binary or libs
+# Ref: https://stackoverflow.com/questions/1124571/get-list-of-static-libraries-used-in-an-executable
+nm $file.so
+nm -C $file.so
