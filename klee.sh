@@ -1,4 +1,5 @@
 # Build KLEE source code
+# Ref: http://klee.github.io/releases/docs/v1.4.0/build-llvm34/
 mkdir /apollo/klee_build_dir
 cd /apollo/klee_build_dir
 cmake $klee_src_dir -DUSE_CMAKE_FIND_PACKAGE_LLVM=ON
