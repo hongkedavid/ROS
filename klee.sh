@@ -1,5 +1,7 @@
 # Build KLEE source code
+mkdir /apollo/klee_build_dir
 cd /apollo/klee_build_dir
+cmake $klee_src_dir -DUSE_CMAKE_FIND_PACKAGE_LLVM=ON
 make
 sudo make install
 
