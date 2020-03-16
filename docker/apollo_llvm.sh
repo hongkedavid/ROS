@@ -165,7 +165,7 @@ clang -c -fvisibility=hidden -emit-llvm -flto -std=c++11 -fwhole-program-vtables
 opt -wholeprogramdevirt $file.bc -o $file_devirt.bc
 
 # dump vtable
-clang++ -Xclang -fdump-vtable-layouts -c -I $include_dir $file.bc > $file.vtable
+clang++ -Xclang -fdump-vtable-layouts -c -I $include_dir $src_file > $file.vtable
 
 # run llvm pass on llvm bitcode
 # Ref: https://stackoverflow.com/questions/9791528/why-optimizations-passes-doesnt-work-without-mem2reg
