@@ -18,3 +18,21 @@ mkdir build
 cd build
 /opt/cmake-3.11.3-Linux-x86_64/bin/cmake llvm-4.0.0.src/
 /opt/cmake-3.11.3-Linux-x86_64/bin/cmake --build . -- -j32
+
+# LLVM debug build
+# https://github.com/llvm/llvm-project/blob/master/clang/INSTALL.txt
+# https://llvm.org/docs/CMake.html
+wget http://releases.llvm.org/3.4.2/cfe-3.4.2.src.tar.gz
+wget http://releases.llvm.org/3.4.2/llvm-3.4.2.src.tar.gz
+tar xf cfe-3.4.2.src.tar.gz
+tar xf llvm-3.4.2.src.tar.gz
+mv cfe-3.4.2.src llvm-3.4.2.src/tools/clang
+mkdir llvm_build
+cd llvm_build
+cmake -DCMAKE_BUILD_TYPE=Debug ../llvm-3.4.2.src
+# for LLVM 8, may need to enable LLVM_TEMPORARILY_ALLOW_OLD_TOOLCHAIN
+cmake -DCMAKE_BUILD_TYPE=Debug -DLLVM_TEMPORARILY_ALLOW_OLD_TOOLCHAIN=true ../llvm-8.0.1.src
+# Build and install LLVM and Clang
+cmake --build .
+sudo cmake --build . --target install
+
