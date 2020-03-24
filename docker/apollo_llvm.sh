@@ -152,6 +152,8 @@ opt -mem2reg $file.bc -o $file_ssa.bc
 opt -reg2mem $file_ssa.bc -o $file.bc
 
 # devirtualize bitcode (require at least LLVM 4.0)
+# Ref: http://releases.llvm.org/7.0.0/tools/clang/docs/ReleaseNotes.html#new-compiler-flags
+# Ref: https://clang.llvm.org/docs/LTOVisibility.html
 # following three lines of command seem to give same bitcode (lto flag is essential to generate types for vtables)
 #clang -c -emit-llvm -flto -fwhole-program-vtables -I $include_dir $src_file -o $file.bc
 #clang -c -emit-llvm -flto -fstrict-vtable-pointers -I $include_dir $src_file -o $file.bc
