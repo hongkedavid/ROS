@@ -152,10 +152,11 @@ opt -mem2reg $file.bc -o $file_ssa.bc
 opt -reg2mem $file_ssa.bc -o $file.bc
 
 # devirtualize bitcode (require at least LLVM 4.0)
-# first two lines of command seem to give same bitcode
+# following three lines of command seem to give same bitcode (lto flag is essential to generate types for vtables)
 #clang -c -emit-llvm -flto -fwhole-program-vtables -I $include_dir $src_file -o $file.bc
 #clang -c -emit-llvm -flto -fstrict-vtable-pointers -I $include_dir $src_file -o $file.bc
-# same output from llvm-dis given above bitcode and the following bitcode
+#clang -c -emit-llvm -flto -fforce-emit-vtables -I $include_dir $src_file -o $file.bc
+# Only devirt if the subclass and base class mapping is one-to-one, often times resulting in same bitcode output before and after
 #opt -wholeprogramdevirt $file.bc -o $file_devirt.bc
 
 # Ref: https://groups.google.com/forum/#!topic/llvm-dev/Z7O338-BYkQ
