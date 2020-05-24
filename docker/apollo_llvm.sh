@@ -162,6 +162,7 @@ opt -reg2mem $file_ssa.bc -o $file.bc
 #opt -wholeprogramdevirt $file.bc -o $file_devirt.bc
 
 # Ref: https://groups.google.com/forum/#!topic/llvm-dev/Z7O338-BYkQ
+# To generate llvm.type.test, need to add "-fvisibility=hidden" option
 clang -c -fvisibility=hidden -emit-llvm -flto -fwhole-program-vtables -I $include_dir $src_file -o $file.bc
 # Example
 clang -c -fvisibility=hidden -emit-llvm -flto -std=c++11 -fwhole-program-vtables -I /apollo/ -I /home/tmp/ -I /apollo/bazel-genfiles -I $build_dir/external/com_google_protobuf/src/ -I /apollo/bazel-genfiles/external/com_github_gflags_gflags/ -I $build_dir/external/eigen/ -I /usr/local/include/pcl-1.7/ -I /usr/include/vtk-5.8/ -I $build_dir/external/curlpp/include/ -I $build_dir/external/ -I $build_dir/external/local_integ/ -I $build_dir/external/civetweb/include/ -I /usr/local/ipopt/include/coin/ -I $build_dir/external/gtest/googlemock/include/ /apollo/modules/control/controller/controller_agent.cc -o controller_agent.bc
